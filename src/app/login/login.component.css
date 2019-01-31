@@ -1,0 +1,35 @@
+.rmuttlogo{
+    width: 40%;
+}
+
+.container-fulid{
+    background-color: #303030;
+    background-size: auto;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    text-align: center;
+    
+}
+mat-form-field{
+    width: 100%;
+    
+}
+.form-group{
+    text-align: center;
+}
+button{
+    width: 20%;
+    text-align: center;
+}
+.example-container {
+    padding: 10px 30px;
+    border-radius: 10px;
+    width: 50%;
+    margin-left: 190px;
+    margin-bottom: 10px;
+  }

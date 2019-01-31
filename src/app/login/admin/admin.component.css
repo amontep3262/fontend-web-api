@@ -1,0 +1,26 @@
+body{
+  background-size: auto;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}
+.home{
+
+  font-size: 18px;
+/* color: rgb(245, 241, 241); */
+text-decoration: none;
+padding-left: 20px;
+}
+.logout{
+font-size: 18px;
+text-decoration: none;
+padding-left: 270px;
+
+}
+a{
+  color: rgb(255, 255, 255);
+}

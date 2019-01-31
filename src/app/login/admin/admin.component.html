@@ -1,0 +1,26 @@
+
+<div class="container-fulid">
+  <div class="row">
+      <mat-toolbar color="primary" class="shadow">
+          <mat-toolbar-row>
+              <div class="home">
+                <a routerLink="/admin/home" class="fa fa-home " aria-hidden="true">&nbsp;หน้าหลัก</a>&nbsp;&nbsp;&nbsp;&nbsp;
+                <a routerLink="/admin/managetable"><i class="fa fa-table "  aria-hidden="true"></i>&nbsp;จัดการข้อมูลผู้ดูแลระบบ</a>&nbsp;&nbsp;&nbsp;
+                <a routerLink="/admin/manageuser"><i class="fa fa-table" aria-hidden="true"></i>&nbsp;จัดการข้อมูลผู้ใช้งานระบบ</a>&nbsp;&nbsp;&nbsp;
+                <a routerLink="/admin/managehardware"><i class="fa fa-table" aria-hidden="true"></i>&nbsp;จัดการข้อมูลนักศึกษา</a>&nbsp;&nbsp;&nbsp;
+                <a routerLink="/admin/manageroom"><i class="fa fa-upload"  aria-hidden="true"></i>&nbsp;อัพโหลดไฟล์</a>&nbsp;&nbsp;&nbsp;
+                <a routerLink="/admin/systemreport"><i class="fa fa-wrench" aria-hidden="true"></i>&nbsp;รายงานสรุปผลพฤติกรรม</a>
+                <!-- <a routerLink="/admin/home" class="fa fa-home" aria-hidden="true">&nbsp;หน้าหลัก</a> -->
+              </div>
+              <div class="logout">
+                <a routerLink="/login" class="fa fa-sign-out" aria-hidden="true">&nbsp;ออกจากระบบ</a>
+              </div>  
+            
+          </mat-toolbar-row>
+        </mat-toolbar>
+   
+
+    
+  </div>
+</div>
+<router-outlet></router-outlet>
