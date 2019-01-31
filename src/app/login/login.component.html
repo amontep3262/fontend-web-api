@@ -1,8 +1,8 @@
-<div class="container-fulid">
+<div class="container-fluid">
   <div class="row">
     <div class="col-md-3"></div>
     <div class="col-md-6">
-      <form>
+      <form [formGroup]="loginform" (ngSubmit)="login()">
         <div class="form-group">
             <img src="../../assets/RMUTT-logo.png" class="rmuttlogo">
         </div>
@@ -12,16 +12,16 @@
         </div>
         <div class="example-container shadow">
             <mat-form-field>
-              <input matInput placeholder="Username" style="color:aliceblue">
+              <input matInput placeholder="Username" style="color:aliceblue" formControlName="admin_id">
             </mat-form-field>
             <mat-form-field>
-              <input matInput placeholder="Password" [type]="hide ? 'password' : 'text'" style="color:aliceblue">
+              <input matInput placeholder="Password" [type]="hide ? 'password' : 'text'" style="color:aliceblue" formControlName="admin_password">
               <mat-icon matSuffix (click)="hide = !hide" style="color:aliceblue">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
             </mat-form-field>
           
         </div>
         <br>
-            <button mat-raised-button color="primary">Login</button>
+            <button mat-raised-button color="primary" type="submit">Login</button>
         
         
       </form>

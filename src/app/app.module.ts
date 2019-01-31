@@ -10,6 +10,8 @@ import { materialModule } from './material';
 import { AdminComponent } from './login/admin/admin.component';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { HomeComponent } from './login/admin/home/home.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 @NgModule({
   declarations: [
     AppComponent,
@@ -25,7 +27,10 @@ import { HomeComponent } from './login/admin/home/home.component';
     NgbAlertModule,
     BrowserAnimationsModule,
     materialModule,
-    AngularFontAwesomeModule
+    AngularFontAwesomeModule,
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
