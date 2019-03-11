@@ -1,0 +1,174 @@
+<mat-toolbar>
+  <div class="toolbarst">
+    จัดการข้อมูลนักศึกษา
+  </div>
+</mat-toolbar>
+<div class="container-fluid">
+
+  <div class="row">
+    <div class="col-md-10">
+      <table class="table table-bordered shadow">
+        <thead>
+          <tr>
+            <th scope="col">Card_id</th>
+            <th scope="col">Student_id</th>
+            <th scope="col">Firstname</th>
+            <th scope="col">Lastname</th>
+            <th scope="col">Sex</th>
+            <th scope="col">Birthday</th>
+            <th scope="col">Group</th>
+            <th scope="col">Faculty</th>
+            <th scope="col">Department</th>
+            <th scope="col">Year</th>
+            <th scope="col">Edit/Delete</th>
+
+          </tr>
+        </thead>
+        <tbody *ngFor="let list of liststudent ">
+          <tr>
+            <td>{{list.card_id}}</td>
+            <td>{{list.student_id}}</td>
+            <td>{{list.firstname}}</td>
+            <td>{{list.lastname}}</td>
+            <td>{{list.sex}}</td>
+            <td>{{list.birthday}}</td>
+            <td>{{list.student_group}}</td>
+            <td>{{list.faculty}}</td>
+            <td>{{list.department}}</td>
+            <td>{{list.year}}</td>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-pencil" (click)="updatestudent(list,edit)" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <i class="fa fa-trash-o" (click)="deletestudent(list.card_id,delete)" aria-hidden="true"></i></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-md-2">
+      <button mat-raised-button color="primary" (click)="openModal(add)">เพิ่มนักศึกษา</button>
+    </div>
+  </div>
+</div>
+
+<ng-template #add let-modal>
+  <form class="animation" [formGroup]="addstudent" (ngSubmit)="add_Student()">
+    <h3>เพิ่มผู้ดูแลระบบ</h3>
+    <mat-form-field>
+      <input matInput placeholder="Card_id" formControlName="card_id">
+    </mat-form-field>
+    <br>
+    <mat-form-field>
+      <input matInput placeholder="Student_id" formControlName="student_id">
+    </mat-form-field>
+    <br>
+    <mat-form-field>
+      <input matInput placeholder="Firstname" formControlName="firstname">
+    </mat-form-field>
+    <br>
+    <mat-form-field>
+      <input matInput placeholder="Lastname" formControlName="lastname">
+    </mat-form-field>
+    <br>
+    <mat-form-field>
+      <input matInput placeholder="Sex" formControlName="sex">
+    </mat-form-field>
+    <br>
+    <mat-form-field>
+      <input matInput placeholder="Birthday" formControlName="birthday">
+    </mat-form-field>
+    <br>
+    <mat-form-field>
+      <input matInput placeholder="Group" formControlName="student_group">
+    </mat-form-field>
+    <br>
+    <mat-form-field>
+      <input matInput placeholder="Faculty" formControlName="faculty">
+    </mat-form-field>
+    <br>
+    <mat-form-field>
+      <input matInput placeholder="Department" formControlName="department">
+    </mat-form-field>
+    <br>
+    <mat-form-field>
+      <input matInput placeholder="Year" formControlName="year">
+    </mat-form-field>
+
+    <!-- <div mat-dialog-actions> -->
+    <br>
+    <button mat-button mat-raised-button color="warn" (click)="closeModal()">ยกเลิก</button>
+    <button mat-raised-button color="primary" type="submit">ยืนยัน</button>
+    <!-- </div> -->
+
+  </form>
+</ng-template>
+
+<ng-template #edit let-modal>
+  <form class="animation" [formGroup]="editstudent" (ngSubmit)="editStudent()">
+    <h3>แก้ไขข้อมูล</h3>
+    <fieldset disabled="disabled">
+      <mat-form-field>
+        <input matInput placeholder="Card_id" formControlName="card_id" [value]="updatecard_id" [(ngModel)]="updatecard_id">
+      </mat-form-field>
+    </fieldset>
+    <mat-form-field>
+      <input matInput placeholder="Student_id" formControlName="student_id" [value]="updatestudent_id" [(ngModel)]="updatestudent_id">
+    </mat-form-field>
+    <br>
+    <mat-form-field>
+      <input matInput placeholder="Firstname" formControlName="firstname" [value]="updatefirstname" [(ngModel)]="updatefirstname">
+    </mat-form-field>
+    <br>
+    <mat-form-field>
+      <input matInput placeholder="Lastname" formControlName="lastname" [value]="updatelastname" [(ngModel)]="updatelastname">
+    </mat-form-field>
+    <br>
+    <mat-form-field>
+      <input matInput placeholder="Sex" formControlName="sex" [value]="updatesex" [(ngModel)]="updatesex">
+    </mat-form-field>
+    <br>
+    <mat-form-field>
+      <input matInput placeholder="Birthday" formControlName="birthday" [value]="updatebirthday" [(ngModel)]="updatebirthday">
+    </mat-form-field>
+    <br>
+    <mat-form-field>
+      <input matInput placeholder="Group" formControlName="student_group" [value]="updatestudent_group" [(ngModel)]="updatestudent_group">
+    </mat-form-field>
+    <br>
+    <mat-form-field>
+      <input matInput placeholder="Faculty" formControlName="faculty" [value]="updatefaculty" [(ngModel)]="updatefaculty">
+    </mat-form-field>
+    <br>
+    <mat-form-field>
+      <input matInput placeholder="Department" formControlName="department" [value]="updatedepartment" [(ngModel)]="updatedepartment">
+    </mat-form-field>
+    <br>
+    <mat-form-field>
+      <input matInput placeholder="Year" formControlName="year" [value]="updateyear" [(ngModel)]="updateyear">
+    </mat-form-field>
+
+
+    <!-- <div mat-dialog-actions> -->
+    <br>
+    <button mat-button mat-raised-button color="warn" (click)="closeModal()">ยกเลิก</button>
+    <button mat-raised-button color="primary" type="submit">ยืนยัน</button>
+    <!-- </div> -->
+
+  </form>
+
+</ng-template>
+
+<ng-template #delete let-modal>
+  <form class="animation">
+    <br>
+    <div>
+      <h4>คุณแน่ใจหรือไม่ ?</h4>
+    </div>
+    <br>
+    <br>
+    <br>
+    <div>
+      <button mat-button mat-raised-button color="warn" (click)="closeModal()">ยกเลิก</button>
+      <button mat-raised-button color="primary" (click)="deleteStudent()">ยืนยัน</button>
+    </div>
+    <br>
+  </form>
+
+</ng-template>

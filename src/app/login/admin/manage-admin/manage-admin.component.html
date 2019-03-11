@@ -1,0 +1,117 @@
+<mat-toolbar>
+    <div class="toolbarst">
+        จัดการข้อมูลผู้ดูแลระบบ
+    </div>
+</mat-toolbar>
+<div class="container-fluid">
+
+    <div class="row">
+        <div class="col-md-10">
+            <table class="table table-bordered shadow">
+                <thead>
+                    <tr>
+                        <th scope="col">Username</th>
+                        <th scope="col">Password</th>
+                        <th scope="col">Firstname</th>
+                        <th scope="col">Lastname</th>
+                        <th scope="col">Edit/Delete</th>
+
+                    </tr>
+                </thead>
+                <tbody *ngFor="let list of listadmin ">
+                    <tr>
+                        <td>{{list.admin_id}}</td>
+                        <!-- <td><label></label></td> -->
+                        <td>{{list.admin_password}}</td>
+                        <td>{{list.firstname}}</td>
+                        <td>{{list.lastname}}</td>
+                        <td>&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-pencil" (click)="updateadmin(list,edit)"
+                                aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <i class="fa fa-trash-o" (click)="deleteadmin(list.admin_id,delete)" aria-hidden="true"></i></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-md-2">
+            <button mat-raised-button color="primary" (click)="openModal(add)">เพิ่มผู้ดูแลระบบ</button>
+        </div>
+    </div>
+</div>
+
+<ng-template #add let-modal>
+    <form class="animation" [formGroup]="addadmin" (ngSubmit)="add_Admin()">
+        <h3>เพิ่มผู้ดูแลระบบ</h3>
+        <mat-form-field>
+            <input matInput placeholder="Username" formControlName="admin_id"  >
+        </mat-form-field>
+        <br>
+        <mat-form-field>
+            <input matInput placeholder="Password" formControlName="admin_password">
+        </mat-form-field>
+        <br>
+        <mat-form-field>
+            <input matInput placeholder="Firstname" formControlName="firstname" >
+        </mat-form-field>
+        <br>
+        <mat-form-field>
+            <input matInput placeholder="Lastname" formControlName="lastname">
+        </mat-form-field>
+
+        <!-- <div mat-dialog-actions> -->
+        <br>
+        <button mat-button mat-raised-button color="warn" (click)="closeModal()">ยกเลิก</button>
+        <button mat-raised-button color="primary" type="submit">ยืนยัน</button>
+        <!-- </div> -->
+
+    </form>
+</ng-template>
+
+<ng-template #edit let-modal>
+    <form class="animation" [formGroup]="editadmin" (ngSubmit)="editAdmin()">
+        <h3>แก้ไขข้อมูล</h3>
+        <fieldset disabled="disabled">
+            <mat-form-field>
+                <input matInput placeholder="Username" formControlName="admin_id" [value]="updateadmin_id" [(ngModel)]="updateadmin_id">
+            </mat-form-field>
+        </fieldset>
+        <mat-form-field>
+            <input matInput placeholder="Password" formControlName="admin_password" [value]="updatepassword"
+                [(ngModel)]="updatepassword">
+        </mat-form-field>
+        <br>
+        <mat-form-field>
+            <input matInput placeholder="Firstname" formControlName="firstname" [value]="updatefirstname" [(ngModel)]="updatefirstname">
+        </mat-form-field>
+        <br>
+        <mat-form-field>
+            <input matInput placeholder="Lastname" formControlName="lastname" [value]="updatelastname" [(ngModel)]="updatelastname">
+        </mat-form-field>
+
+        <!-- <div mat-dialog-actions> -->
+        <br>
+        <button mat-button mat-raised-button color="warn" (click)="closeModal()">ยกเลิก</button>
+        <button mat-raised-button color="primary" type="submit">ยืนยัน</button>
+        <!-- </div> -->
+
+    </form>
+
+</ng-template>
+
+<ng-template #delete let-modal>
+    <form class="animation">
+        <br>
+        <div>
+            <h4>คุณแน่ใจหรือไม่ ?</h4>
+        </div>
+        <br>
+        <br>
+        <br>
+        <div>
+            <button mat-button mat-raised-button color="warn" (click)="closeModal()">ยกเลิก</button>
+            <button mat-raised-button color="primary" (click)="deleteAdmin()">ยืนยัน</button>
+        </div>
+        <br>
+    </form>
+
+</ng-template>
+

@@ -1,0 +1,56 @@
+.container-fluid{
+    background-color: #303030;
+    background-size: auto;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 91.5%;
+    
+    
+}
+.toolbarst{
+    background-color: darkgray;
+    color :aliceblue;
+    width: 100%;
+}
+table {
+    width: 90%;
+    /* background-color: #919090; */
+    color :rgb(8, 8, 8);
+    /* margin-left: 260px; */
+    border: 1px solid rgb(228, 226, 226);
+    margin-left: 50px;
+  }
+  th{
+    background-color: #919090;
+  }
+  td{
+    background-color: #e4dcdc;
+  }
+  orm{
+    margin: 30px;
+    transition-delay: 2s;
+}
+.infrom{
+    width: 100%;
+    color: aliceblue;
+}
+.button-row button,
+.button-row a {
+  margin-right: 10px;
+}
+
+.dropdow
+{
+    width: 100%;
+}
+.uploadForm{
+    border: 1px solid rgb(228, 226, 226);
+    border-radius: 10px;
+    padding: 20px 20px 20px 20px;
+}
+.animation{
+    background-color: #303030;
+    text-align: center;
+    color: aliceblue;
+    
+}

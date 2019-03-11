@@ -4,7 +4,16 @@ import {
     MatInputModule,
     MatIconModule,
     MatToolbarModule,
-    MatGridListModule
+    MatGridListModule,
+    MatTableModule,
+    MatOptionModule,
+    MatSelectModule,
+    MatCardModule,
+    MatPaginatorModule,
+    MatExpansionModule,
+    MatFormFieldModule,
+    MatDialogModule
+    
 } from '@angular/material'
 @NgModule({
     imports:[
@@ -12,14 +21,35 @@ import {
         MatInputModule,
         MatIconModule,
         MatToolbarModule,
-        MatGridListModule
+        MatGridListModule,
+        MatTableModule,
+        MatOptionModule,
+        MatSelectModule,
+        MatCardModule,
+        MatTableModule,
+        MatPaginatorModule,
+        MatExpansionModule,
+        MatFormFieldModule,
+        MatDialogModule
+        
     ],
     exports:[
         MatButtonModule,
         MatInputModule,
         MatIconModule,
         MatToolbarModule,
-        MatGridListModule
+        MatGridListModule,
+        MatTableModule,
+        MatOptionModule,
+        MatSelectModule,
+        MatCardModule,
+        MatTableModule,
+        MatPaginatorModule,
+        MatExpansionModule,
+        MatFormFieldModule,
+        MatDialogModule
+        
+
     ]
 })
 export class materialModule{}

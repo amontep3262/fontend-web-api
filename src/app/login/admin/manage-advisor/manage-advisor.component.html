@@ -1,0 +1,145 @@
+<mat-toolbar>
+  <div class="toolbarst">
+    จัดการข้อมูลอาจารย์ที่ปรึกษา
+  </div>
+</mat-toolbar>
+<div class="container-fluid">
+
+  <div class="row">
+    <div class="col-md-10">
+      <table class="table table-bordered shadow">
+        <thead>
+          <tr>
+            <th scope="col">Advisor_ID</th>
+            <th scope="col">Firstname</th>
+            <th scope="col">Lastname</th>
+            <th scope="col">Email</th>
+            <th scope="col">Phone</th>
+            <th scope="col">Faculty</th>
+            <th scope="col">Department</th>
+            <th scope="col">Edit/Delete</th>
+
+          </tr>
+        </thead>
+        <tbody *ngFor="let list of listadvisor ">
+          <tr>
+            <td>{{list.advisor_id}}</td>
+            <td>{{list.firstname}}</td>
+            <td>{{list.lastname}}</td>
+            <td>{{list.email}}</td>
+            <td>{{list.phone_number}}</td>
+            <td>{{list.faculty}}</td>
+            <td>{{list.department}}</td>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-pencil" (click)="updateadviser(list,edit)" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <i class="fa fa-trash-o" (click)="deleteadviser(list.advisor_id,delete)" aria-hidden="true"></i></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-md-2">
+      <button mat-raised-button color="primary" (click)="openModal(add)">เพิ่มอาจารย์ที่ปรึกษา</button>
+    </div>
+  </div>
+</div>
+
+<ng-template #add let-modal>
+  <form class="animation" [formGroup]="addadviser" (ngSubmit)="add_adviser()">
+    <h3>เพิ่มอาจารย์ที่ปรึกษา</h3>
+    <mat-form-field>
+      <input matInput placeholder="Advisor_id" formControlName="advisor_id">
+    </mat-form-field>
+    <br>
+    <mat-form-field>
+      <input matInput placeholder="Firstname" formControlName="firstname">
+    </mat-form-field>
+    <br>
+    <mat-form-field>
+      <input matInput placeholder="Lastname" formControlName="lastname">
+    </mat-form-field>
+    <br>
+    <mat-form-field>
+      <input matInput placeholder="Email" formControlName="email">
+    </mat-form-field>
+    <br>
+    <mat-form-field>
+      <input matInput placeholder="Phone" formControlName="phone_number">
+    </mat-form-field>
+    <br>
+    <mat-form-field>
+      <input matInput placeholder="Faculty" formControlName="faculty">
+    </mat-form-field>
+    <br>
+    <mat-form-field>
+      <input matInput placeholder="Department" formControlName="department">
+    </mat-form-field>
+
+    <!-- <div mat-dialog-actions> -->
+    <br>
+    <button mat-button mat-raised-button color="warn" (click)="closeModal()">ยกเลิก</button>
+    <button mat-raised-button color="primary" type="submit">ยืนยัน</button>
+    <!-- </div> -->
+
+  </form>
+</ng-template>
+
+<ng-template #edit let-modal>
+  <form class="animation" [formGroup]="editadvisor" (ngSubmit)="editAdvisor()">
+    <h3>แก้ไขข้อมูล</h3>
+    <fieldset disabled="disabled">
+      <mat-form-field>
+        <input matInput placeholder="Advisor_id" formControlName="advisor_id" [value]="updateadvisor_id" [(ngModel)]="updateadvisor_id">
+      </mat-form-field>
+    </fieldset>
+    <br>
+    <mat-form-field>
+      <input matInput placeholder="Firstname" formControlName="firstname" [value]="updatefirstname" [(ngModel)]="updatefirstname">
+    </mat-form-field>
+    <br>
+    <mat-form-field>
+      <input matInput placeholder="Lastname" formControlName="lastname" [value]="updatelastname" [(ngModel)]="updatelastname">
+    </mat-form-field>
+    <br>
+    <mat-form-field>
+      <input matInput placeholder="Email" formControlName="email" [value]="updateemail" [(ngModel)]="updateemail">
+    </mat-form-field>
+    <br>
+    <mat-form-field>
+      <input matInput placeholder="Phone" formControlName="phone_number" [value]="updatephone_number" [(ngModel)]="updatephone_number">
+    </mat-form-field>
+    <br>
+    <mat-form-field>
+      <input matInput placeholder="Faculty" formControlName="faculty" [value]="updatefaculty" [(ngModel)]="updatefaculty">
+    </mat-form-field>
+    <br>
+    <mat-form-field>
+      <input matInput placeholder="Department" formControlName="department" [value]="updatedepartment" [(ngModel)]="updatedepartment">
+    </mat-form-field>
+
+
+    <!-- <div mat-dialog-actions> -->
+    <br>
+    <button mat-button mat-raised-button color="warn" (click)="closeModal()">ยกเลิก</button>
+    <button mat-raised-button color="primary" type="submit">ยืนยัน</button>
+    <!-- </div> -->
+
+  </form>
+
+</ng-template>
+
+<ng-template #delete let-modal>
+  <form class="animation">
+    <br>
+    <div>
+      <h4>คุณแน่ใจหรือไม่ ?</h4>
+    </div>
+    <br>
+    <br>
+    <br>
+    <div>
+      <button mat-button mat-raised-button color="warn" (click)="closeModal()">ยกเลิก</button>
+      <button mat-raised-button color="primary" (click)="deleteAdvisort()">ยืนยัน</button>
+    </div>
+    <br>
+  </form>
+
+</ng-template>

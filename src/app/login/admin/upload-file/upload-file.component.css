@@ -5,13 +5,12 @@
     background-size: cover;
     height: 91.5%;
     
+    
 }
-.rmuttlogo{
-    width: 55%;
-}
-.form-group{
-    text-align: center;
-}
-.col-md-6{
-    margin-top: 150px;
+.example-full-width{
+    border: 3px solid darkgray;
+    background-color: darkgrey;
+    width: 400px;
+    height: 350px;
+    top: 80px;
 }
