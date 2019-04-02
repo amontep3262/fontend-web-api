@@ -1,12 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ServiceService } from '../../../service.service';
+import { MatTableDataSource, MatPaginator } from '@angular/material';
 @Component({
   selector: 'app-report-behavior',
   templateUrl: './report-behavior.component.html',
   styleUrls: ['./report-behavior.component.css']
 })
 export class ReportBehaviorComponent implements OnInit {
+
+  displayedColumns: string[] = ['รหัสนักศึกษา', 'ชื่อ-นามสกุล','คณะ','ภาควิชา','กลุ่ม','พฤติกรรมที่ผิดระเบียบ','วันที่','เวลา'];
+  dataSource : MatTableDataSource<[any]>;
+
+  @ViewChild(MatPaginator) paginator: MatPaginator;
 
   listdepartment;
   listbehavior;
@@ -30,6 +36,8 @@ export class ReportBehaviorComponent implements OnInit {
     this.service.getbehavior().subscribe(
       (res)=>{
         this.listbehavior = res;
+        this.dataSource = new MatTableDataSource(res as any[])
+        this.dataSource.paginator = this.paginator;
         
       }
     )
@@ -40,6 +48,8 @@ export class ReportBehaviorComponent implements OnInit {
       (res)=>{
         // alert("suc")
         this.listbehavior = res;
+        this.dataSource = new MatTableDataSource(res as any[])
+        this.dataSource.paginator = this.paginator;
       }
     )
   }

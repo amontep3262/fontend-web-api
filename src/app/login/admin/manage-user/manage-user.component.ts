@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ServiceService } from 'src/app/service.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormControl, FormGroup } from '@angular/forms';
+import { MatTableDataSource, MatPaginator } from '@angular/material';
 
 @Component({
   selector: 'app-manage-user',
@@ -9,6 +10,13 @@ import { FormControl, FormGroup } from '@angular/forms';
   styleUrls: ['./manage-user.component.css']
 })
 export class ManageUserComponent implements OnInit {
+
+  displayedColumns: string[] = ['บัญชีผู้ใช้ระบบ', 'รหัสผ่าน', 'ชื่อ', 'นามสกุล', 'อีเมล์', 'เบอร์โทรศัพท์', 'คณะ', 'ภาควิชา', 'แก้ไข/ลบ'];
+  dataSource: MatTableDataSource<[any]>;
+
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+
+
 
   listuser;
   updateuser_id;
@@ -35,11 +43,17 @@ export class ManageUserComponent implements OnInit {
     faculty: new FormControl(''),
     department: new FormControl('')
   })
+  // public sreachuser = new FormGroup({
+  public userid = new FormControl('');
+  // })
+
 
   ngOnInit() {
     this.service.getuser().subscribe(
       (res) => {
         this.listuser = res;
+        this.dataSource = new MatTableDataSource(res as any[])
+        this.dataSource.paginator = this.paginator;
       }
     )
   }
@@ -64,6 +78,19 @@ export class ManageUserComponent implements OnInit {
     this.modalService.dismissAll()
   }
 
+  sreach() {
+    console.log(this.userid.value);
+
+    this.service.sreach(this.userid.value).subscribe(
+      (res) => {
+        this.listuser = res;
+        this.dataSource = new MatTableDataSource(res as any[])
+        this.dataSource.paginator = this.paginator;
+      }
+    )
+  }
+
+
   editUser() {
     this.service.edituser(this.edituser.value).subscribe(
       (res) => {
@@ -72,20 +99,22 @@ export class ManageUserComponent implements OnInit {
         this.service.getuser().subscribe(
           (res) => {
             this.listuser = res;
+            this.dataSource = new MatTableDataSource(res as any[])
+            this.dataSource.paginator = this.paginator;
           }
         )
       }
     )
   }
 
-  deleteuser(userid,modal){
+  deleteuser(userid, modal) {
     this.user_id = userid;
-    this.modalService.open(modal,{centered:true});
+    this.modalService.open(modal, { centered: true });
   }
 
-  deleteUser(){
+  deleteUser() {
     console.log(this.user_id);
-    
+
     this.service.deleteuser(this.user_id).subscribe(
       (res) => {
         alert("ลบสำเร็จ")
@@ -93,6 +122,8 @@ export class ManageUserComponent implements OnInit {
         this.service.getuser().subscribe(
           (res) => {
             this.listuser = res;
+            this.dataSource = new MatTableDataSource(res as any[])
+            this.dataSource.paginator = this.paginator;
           }
         )
 

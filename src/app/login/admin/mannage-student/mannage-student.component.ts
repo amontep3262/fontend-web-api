@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ServiceService } from '../../../service.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormControl, FormGroup } from '@angular/forms';
+import { log } from 'util';
+import { MatTableDataSource, MatPaginator } from '@angular/material';
 
 @Component({
   selector: 'app-mannage-student',
@@ -9,6 +11,11 @@ import { FormControl, FormGroup } from '@angular/forms';
   styleUrls: ['./mannage-student.component.css']
 })
 export class MannageStudentComponent implements OnInit {
+
+  displayedColumns: string[] = ['หมายเลขบัตรประชาชน', 'รหัสนักศึกษา', 'ชื่อ-นามสกุล', 'เพศ','วันเกิด','คณะ','ภาควิชา','กลุ่ม','ชั้นปี','แก้ไข/ลบ'];
+  dataSource : MatTableDataSource<[any]>;
+
+  @ViewChild(MatPaginator) paginator: MatPaginator;
 
   liststudent;
   updatecard_id;
@@ -31,6 +38,8 @@ export class MannageStudentComponent implements OnInit {
     this.service.getstudent().subscribe(
       (res) => {
             this.liststudent = res;
+            this.dataSource = new MatTableDataSource(res as any[])
+            this.dataSource.paginator = this.paginator;
       }
     )
 
@@ -39,8 +48,8 @@ export class MannageStudentComponent implements OnInit {
   public addstudent = new FormGroup({
     card_id: new FormControl(''),
     student_id: new FormControl(''),
-    firstname: new FormControl(''),
-    lastname: new FormControl(''),
+    student_name: new FormControl(''),
+    // lastname: new FormControl(''),
     sex: new FormControl(''),
     birthday: new FormControl(''),
     student_group: new FormControl(''),
@@ -53,8 +62,8 @@ export class MannageStudentComponent implements OnInit {
   public editstudent = new FormGroup({
     card_id: new FormControl(''),
     student_id: new FormControl(''),
-    firstname: new FormControl(''),
-    lastname: new FormControl(''),
+    student_name: new FormControl(''),
+    // lastname: new FormControl(''),
     sex: new FormControl(''),
     birthday: new FormControl(''),
     student_group: new FormControl(''),
@@ -63,11 +72,15 @@ export class MannageStudentComponent implements OnInit {
     year: new FormControl('')
   })
 
+  // public sreachstudent = new FormGroup({
+   public student_id= new FormControl('')
+//  })
+
   updatestudent(list, modal) {
     this.updatecard_id = list.card_id;
     this.updatestudent_id = list.student_id;
-    this.updatefirstname = list.firstname;
-    this.updatelastname = list.lastname;
+    this.updatefirstname = list.student_name;
+    // this.updatelastname = list.lastname;
     this.updatesex = list.sex;
     this.updatebirthday = list.birthday;
     this.updatestudent_group = list.student_group;
@@ -88,6 +101,22 @@ export class MannageStudentComponent implements OnInit {
     this.modalService.dismissAll()
   }
 
+  sreachstu(){
+    console.log(this.student_id.value);
+    
+    this.service.sreachstu(this.student_id.value).subscribe(
+      
+      
+      (res)=>{
+        console.log(this.student_id.value);
+        this.liststudent=res;
+        this.dataSource = new MatTableDataSource(res as any[])
+        this.dataSource.paginator = this.paginator;
+        
+      }
+    )
+  }
+
   editStudent() {
     console.log(this.editstudent.value)
     this.service.editstudent(this.editstudent.value).subscribe(
@@ -97,6 +126,8 @@ export class MannageStudentComponent implements OnInit {
         this.service.getstudent().subscribe(
           (res) => {
             this.liststudent = res;
+            this.dataSource = new MatTableDataSource(res as any[])
+            this.dataSource.paginator = this.paginator;
           }
         )
       },
@@ -114,6 +145,8 @@ export class MannageStudentComponent implements OnInit {
         this.service.getstudent().subscribe(
           (res) => {
             this.liststudent = res;
+            this.dataSource = new MatTableDataSource(res as any[])
+            this.dataSource.paginator = this.paginator;
           }
         )
 
@@ -133,6 +166,9 @@ export class MannageStudentComponent implements OnInit {
         this.service.getstudent().subscribe(
           (res) => {
             this.liststudent = res;
+            this.dataSource = new MatTableDataSource(res as any[])
+            this.dataSource.paginator = this.paginator;
+          
           }
         )
 

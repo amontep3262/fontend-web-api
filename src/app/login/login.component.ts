@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { ServiceService } from '../service.service';
+import { Router } from '@angular/router';
 // import { Route } from '@angular/compiler/src/core';
 
 @Component({
@@ -16,7 +17,7 @@ export class LoginComponent implements OnInit {
   })
   constructor(
     private service: ServiceService,
-    // private route : Route
+    private route : Router
   ) { }
 
   ngOnInit() {
@@ -26,7 +27,8 @@ export class LoginComponent implements OnInit {
     console.log(this.loginform.value)
     this.service.login(this.loginform.value).subscribe(
       (res)=>{
-        alert("connected")
+        alert("เข้าสู่ระบบสำเร็จ")
+        if(res){this.route.navigate(['admin/home']);}
         // this.route.navigate(['admin/home']);
       },
       (err)=>{

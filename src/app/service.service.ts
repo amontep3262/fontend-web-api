@@ -67,4 +67,25 @@ export class ServiceService {
   getdepartment(){
     return this.http.get(urlServer.ipServer+'selectdepartment/')
   }
+  uploadfile(data){
+    return this.http.post(urlServer.ipServer+'uploadfile',data)
+  }
+  getsub(data){
+    return this.http.get(urlServer.ipServer+'selectsub/'+data)
+  }
+  addsub(data){
+    return this.http.post(urlServer.ipServer+'addsub',data)
+  }
+  ckselectsty(data,data1,data2,data3){
+    return this.http.get(urlServer.ipServer+'ckselectsty/'+data+'/'+data1+'/'+data2+'/'+data3)
+  }
+  sreach(data){
+    return this.http.get(urlServer.ipServer+'sreachuser/'+data)
+  }
+  sreachstu(data){
+    return this.http.get(urlServer.ipServer+'sreachstu/'+data)
+  }
+  sreachadv(data){
+    return this.http.get(urlServer.ipServer+'sreachadv/'+data)
+  }
 }

@@ -1,14 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ServiceService } from '../../../service.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormControl, FormGroup } from '@angular/forms';
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { MatTableDataSource, MatPaginator } from '@angular/material';
 @Component({
   selector: 'app-manage-admin',
   templateUrl: './manage-admin.component.html',
   styleUrls: ['./manage-admin.component.css']
 })
 export class ManageAdminComponent implements OnInit {
+
+  displayedColumns: string[] = ['บัญชีผู้ดูแลระบบ', 'รหัสผ่าน', 'ชื่อ', 'นามสกุล','แก้ไข/ลบ'];
+  dataSource: MatTableDataSource<[any]>;
+
+  @ViewChild(MatPaginator) paginator: MatPaginator;
 
 
   listadmin;
@@ -25,32 +31,32 @@ export class ManageAdminComponent implements OnInit {
     // public dialog :MatDialog
   ) { }
 
-public addadmin = new FormGroup({
-  admin_id : new FormControl(''),
-  admin_password: new FormControl(''),
-  firstname: new FormControl(''),
-  lastname: new FormControl('')
-})
-  
-public editadmin = new FormGroup({
-  admin_id : new FormControl(''),
-  admin_password: new FormControl(''),
-  firstname: new FormControl(''),
-  lastname: new FormControl('')
-})
+  public addadmin = new FormGroup({
+    admin_id: new FormControl(''),
+    admin_password: new FormControl(''),
+    firstname: new FormControl(''),
+    lastname: new FormControl('')
+  })
 
-updateadmin(list,modal){
-  this.updateadmin_id = list.admin_id;
-  this.updatepassword = list.admin_password;
-  this.updatefirstname = list.firstname;
-  this.updatelastname = list.lastname;
-  this.modalService.open(modal,{ centered: true });
+  public editadmin = new FormGroup({
+    admin_id: new FormControl(''),
+    admin_password: new FormControl(''),
+    firstname: new FormControl(''),
+    lastname: new FormControl('')
+  })
 
-}
-deleteadmin(adminid,modal){
-  this.admin_id = adminid;
-  this.modalService.open(modal,{centered:true});
-}
+  updateadmin(list, modal) {
+    this.updateadmin_id = list.admin_id;
+    this.updatepassword = list.admin_password;
+    this.updatefirstname = list.firstname;
+    this.updatelastname = list.lastname;
+    this.modalService.open(modal, { centered: true });
+
+  }
+  deleteadmin(adminid, modal) {
+    this.admin_id = adminid;
+    this.modalService.open(modal, { centered: true });
+  }
 
 
 
@@ -58,11 +64,13 @@ deleteadmin(adminid,modal){
     this.service.getadmin().subscribe(
       (res) => {
         this.listadmin = res;
+        this.dataSource = new MatTableDataSource(res as any[])
+        this.dataSource.paginator = this.paginator;
       }
     )
   }
 
-  
+
   openModal(template) {
     this.modalService.open(template, { centered: true });
   }
@@ -70,24 +78,26 @@ deleteadmin(adminid,modal){
     this.modalService.dismissAll()
   }
 
-  editAdmin(){
+  editAdmin() {
     console.log(this.editadmin.value)
     this.service.editadmin(this.editadmin.value).subscribe(
-      (res)=>{
+      (res) => {
         alert("แก้ไขสำเร็จ")
         this.modalService.dismissAll();
         this.service.getadmin().subscribe(
           (res) => {
             this.listadmin = res;
+            this.dataSource = new MatTableDataSource(res as any[])
+            this.dataSource.paginator = this.paginator;
           }
         )
       },
-      (err)=>{
+      (err) => {
         alert("แก้ไขไม่สำเร็จ")
       }
     )
   }
-  deleteAdmin(){
+  deleteAdmin() {
     this.service.deleteadmin(this.admin_id).subscribe(
       (res) => {
         alert("ลบสำเร็จ")
@@ -95,6 +105,8 @@ deleteadmin(adminid,modal){
         this.service.getadmin().subscribe(
           (res) => {
             this.listadmin = res;
+            this.dataSource = new MatTableDataSource(res as any[])
+            this.dataSource.paginator = this.paginator;
           }
         )
 
@@ -105,20 +117,22 @@ deleteadmin(adminid,modal){
     )
   }
 
-  add_Admin(){
+  add_Admin() {
     console.log(this.addadmin.value);
     this.service.addadmin(this.addadmin.value).subscribe(
-      (res)=>{
+      (res) => {
         alert("บันทึกสำเร็จ")
         this.modalService.dismissAll();
         this.service.getadmin().subscribe(
           (res) => {
             this.listadmin = res;
+            this.dataSource = new MatTableDataSource(res as any[])
+            this.dataSource.paginator = this.paginator;
           }
         )
 
       },
-      (err)=>{
+      (err) => {
         alert("บันทึกไม่สำเร็จ")
       }
     )

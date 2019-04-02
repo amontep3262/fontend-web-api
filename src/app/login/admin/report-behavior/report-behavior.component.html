@@ -19,15 +19,90 @@
 <!-- <br> -->
 <div class="container-fluid">
   <div class="row">
+
+    <div class="col-md-6">
+      <br>
+
+      <!-- <form class="sreach" [formGroup]="sreachstudent" (ngSubmit)="sreachstu()" style="margin-left: 70px" > -->
+      <!-- <mat-form-field  > -->
+      <input placeholder="ค้นหานักศึกษา" class="sreach" [formControl]="student_id">
+      <!-- </mat-form-field> -->
+      <button mat-raised-button color="primary" type="submit" (click)="sreachbhv()">ค้นหา</button>
+      <!-- </form> -->
+    </div>
+    <div class="col-md-6">
+      <br>
+
+      <form class="select">
+        <select placeholder="เลือกภาควิชา" class="sreach " (selectionChange)="selectdepartment()" [formControl]="department"
+          name="เลือกภาควิชา">
+          <!-- <option value="0">เลือกภาควิชา</option> -->
+          <option *ngFor="let list of listdepartment" [value]="list.department">{{list.department}}</option>
+        </select>
+      </form>
+    </div>
+    <div class="col-md-4"></div>
+  </div>
+  <div class="row">
     <div class="col-md-12">
-        <mat-form-field>
-            <mat-select placeholder="เลือกภาควิชา" (selectionChange)="selectdepartment()" [formControl]="department">
-              <mat-option *ngFor="let list of listdepartment" [value]="list.department">{{list.department}}</mat-option>
-            </mat-select>
-          </mat-form-field>
+
       <br>
       <br>
-      <table class="table table-bordered shadow">
+      <div class="mat-elevation-z8">
+        <table mat-table [dataSource]="dataSource">
+
+          <!-- Name Column -->
+          <ng-container matColumnDef="รหัสนักศึกษา">
+            <th mat-header-cell *matHeaderCellDef> รหัสนักศึกษา </th>
+            <td mat-cell *matCellDef="let element"> {{element.student_id}} </td>
+          </ng-container>
+
+          <!-- Weight Column -->
+          <ng-container matColumnDef="ชื่อ-นามสกุล">
+            <th mat-header-cell *matHeaderCellDef> ชื่อ-นามสกุล </th>
+            <td mat-cell *matCellDef="let element"> {{element.student_name}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="คณะ">
+            <th mat-header-cell *matHeaderCellDef> คณะ </th>
+            <td mat-cell *matCellDef="let element"> {{element.faculty}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="ภาควิชา">
+            <th mat-header-cell *matHeaderCellDef> ภาควิชา </th>
+            <td mat-cell *matCellDef="let element"> {{element.department}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="กลุ่ม">
+            <th mat-header-cell *matHeaderCellDef> กลุ่ม </th>
+            <td mat-cell *matCellDef="let element"> {{element.student_group}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="พฤติกรรมที่ผิดระเบียบ">
+              <th mat-header-cell *matHeaderCellDef> พฤติกรรมที่ผิดระเบียบ </th>
+              <td mat-cell *matCellDef="let element"> {{element.behavior}} </td>
+            </ng-container>
+
+            <!-- Name Column -->
+            <ng-container matColumnDef="วันที่">
+              <th mat-header-cell *matHeaderCellDef> วันที่ </th>
+              <td mat-cell *matCellDef="let element"> {{element.date}} </td>
+            </ng-container>
+
+            <!-- Weight Column -->
+            <ng-container matColumnDef="เวลา">
+              <th mat-header-cell *matHeaderCellDef> เวลา </th>
+              <td mat-cell *matCellDef="let element"> {{element.behavior_time}} </td>
+            </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+
+        <mat-paginator [pageSizeOptions]="[5, 10]" showFirstLastButtons></mat-paginator>
+      </div>
+
+      <!-- <table class="table table-bordered shadow">
         <thead>
           <tr>
             <th scope="col">Student_id</th>
@@ -53,7 +128,7 @@
             <td>{{list.behavior_time}}</td>
           </tr>
         </tbody>
-      </table>
+      </table> -->
     </div>
   </div>
 </div>

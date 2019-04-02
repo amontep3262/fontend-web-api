@@ -17,6 +17,7 @@ import { MannageStudentComponent } from './login/admin/mannage-student/mannage-s
 import { ManageAdvisorComponent } from './login/admin/manage-advisor/manage-advisor.component';
 import { ReportBehaviorComponent } from './login/admin/report-behavior/report-behavior.component';
 import { UploadFileComponent } from './login/admin/upload-file/upload-file.component';
+import { PaginationModule } from 'ngx-bootstrap';
 @NgModule({
   declarations: [
     AppComponent,
@@ -41,7 +42,8 @@ import { UploadFileComponent } from './login/admin/upload-file/upload-file.compo
     HttpClientModule,
     NgbModule,
     NgbPaginationModule,
-    NgbAlertModule
+    NgbAlertModule,
+    PaginationModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -4,40 +4,109 @@
   </div>
 </mat-toolbar>
 <div class="container-fluid">
-
   <div class="row">
-    <div class="col-md-10">
-      <table class="table table-bordered shadow">
+
+    <div class="col-md-8" >
+
+      <br>
+      <!-- <form class="sreach" [formGroup]="sreachstudent" (ngSubmit)="sreachstu()"> -->
+        <!-- <mat-form-field  > -->
+        <input  placeholder="ค้นหาอาจารย์ที่ปรึกษา" class="sreach" [formControl]="student_group">
+        <!-- </mat-form-field> -->
+        <button mat-raised-button color="primary" type="submit" (click)="sreachadv()">ค้นหา</button>
+      <!-- </form> -->
+      <br>
+
+    </div>
+    <div class="col-md-4">
+        <br>
+        <button mat-raised-button color="primary" (click)="openModal(add)">เพิ่มอาจารย์ที่ปรึกษา</button>
+    </div>
+  </div>
+  <br>
+  <div class="row">
+    <div class="col-md-12">
+
+        <div class="mat-elevation-z8">
+            <table mat-table [dataSource]="dataSource">
+  
+              <!-- Position Column -->
+              <ng-container matColumnDef="ชื่อ-นามสกุล">
+                <th mat-header-cell *matHeaderCellDef> ชื่อ-นามสกุล </th>
+                <td mat-cell *matCellDef="let element"> {{element.advisor_name}} </td>
+              </ng-container>
+  
+              <!-- Name Column -->
+              <ng-container matColumnDef="อีเมล์">
+                <th mat-header-cell *matHeaderCellDef> อีเมล์ </th>
+                <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+              </ng-container>
+  
+              <!-- Weight Column -->
+              <ng-container matColumnDef="เบอร์โทรศัพท์">
+                <th mat-header-cell *matHeaderCellDef> เบอร์โทรศัพท์ </th>
+                <td mat-cell *matCellDef="let element"> {{element.phone_number}} </td>
+              </ng-container>
+  
+              <!-- Symbol Column -->
+              <ng-container matColumnDef="คณะ">
+                <th mat-header-cell *matHeaderCellDef> คณะ </th>
+                <td mat-cell *matCellDef="let element"> {{element.faculty}} </td>
+              </ng-container>
+  
+              <ng-container matColumnDef="ภาควิชา">
+                <th mat-header-cell *matHeaderCellDef> ภาควิชา </th>
+                <td mat-cell *matCellDef="let element"> {{element.department}} </td>
+              </ng-container>
+  
+              <ng-container matColumnDef="กลุ่ม">
+                <th mat-header-cell *matHeaderCellDef> กลุ่ม </th>
+                <td mat-cell *matCellDef="let element"> {{element.student_group}} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="แก้ไข/ลบ">
+                <th mat-header-cell *matHeaderCellDef> แก้ไข/ลบ </th>
+                <td mat-cell *matCellDef="let element">&nbsp;&nbsp;&nbsp;&nbsp;<i style="cursor: pointer;" class="fa fa-pencil" (click)="updateadviser(element,edit)"
+                    aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  <i class="fa fa-trash-o" (click)="deleteadviser(element.id,delete)" aria-hidden="true" style="cursor: pointer;"></i></td>
+              </ng-container>
+  
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+  
+            <mat-paginator [pageSizeOptions]="[5, 10]" showFirstLastButtons></mat-paginator>
+          </div>
+      <!-- <table class="table table-bordered shadow">
         <thead>
           <tr>
-            <th scope="col">Advisor_ID</th>
-            <th scope="col">Firstname</th>
-            <th scope="col">Lastname</th>
-            <th scope="col">Email</th>
-            <th scope="col">Phone</th>
-            <th scope="col">Faculty</th>
-            <th scope="col">Department</th>
-            <th scope="col">Edit/Delete</th>
+
+            <th scope="col">ชื่อ-นามสกุล</th>
+            
+            <th scope="col">อีเมล์</th>
+            <th scope="col">เบอร์โทรศัพท์</th>
+            <th scope="col">คณะ</th>
+            <th scope="col">ภาควิชา</th>
+            <th scope="col">กลุ่มนักศึกษา</th>
+            <th scope="col">แก้ไข/ลบ</th>
 
           </tr>
         </thead>
         <tbody *ngFor="let list of listadvisor ">
           <tr>
-            <td>{{list.advisor_id}}</td>
-            <td>{{list.firstname}}</td>
-            <td>{{list.lastname}}</td>
+
+            <td>{{list.advisor_name}}</td>
+            
             <td>{{list.email}}</td>
             <td>{{list.phone_number}}</td>
             <td>{{list.faculty}}</td>
             <td>{{list.department}}</td>
+            <td>{{list.student_group}}</td>
             <td>&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-pencil" (click)="updateadviser(list,edit)" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-              <i class="fa fa-trash-o" (click)="deleteadviser(list.advisor_id,delete)" aria-hidden="true"></i></td>
+              <i class="fa fa-trash-o" (click)="deleteadviser(list.id,delete)" aria-hidden="true"></i></td>
           </tr>
         </tbody>
-      </table>
-    </div>
-    <div class="col-md-2">
-      <button mat-raised-button color="primary" (click)="openModal(add)">เพิ่มอาจารย์ที่ปรึกษา</button>
+      </table> -->
     </div>
   </div>
 </div>
@@ -45,32 +114,34 @@
 <ng-template #add let-modal>
   <form class="animation" [formGroup]="addadviser" (ngSubmit)="add_adviser()">
     <h3>เพิ่มอาจารย์ที่ปรึกษา</h3>
-    <mat-form-field>
-      <input matInput placeholder="Advisor_id" formControlName="advisor_id">
-    </mat-form-field>
+
     <br>
     <mat-form-field>
-      <input matInput placeholder="Firstname" formControlName="firstname">
+      <input matInput placeholder="ชื่อ-นามสกุล" formControlName="advisor_name">
     </mat-form-field>
-    <br>
+    <!-- <br>
     <mat-form-field>
       <input matInput placeholder="Lastname" formControlName="lastname">
+    </mat-form-field> -->
+    <br>
+    <mat-form-field>
+      <input matInput placeholder="อีเมล์" formControlName="email">
     </mat-form-field>
     <br>
     <mat-form-field>
-      <input matInput placeholder="Email" formControlName="email">
+      <input matInput placeholder="เบอร์โทรศัพท์" formControlName="phone_number">
     </mat-form-field>
     <br>
     <mat-form-field>
-      <input matInput placeholder="Phone" formControlName="phone_number">
+      <input matInput placeholder="คณะ" formControlName="faculty">
     </mat-form-field>
     <br>
     <mat-form-field>
-      <input matInput placeholder="Faculty" formControlName="faculty">
+      <input matInput placeholder="ภาควิชา" formControlName="department">
     </mat-form-field>
     <br>
     <mat-form-field>
-      <input matInput placeholder="Department" formControlName="department">
+      <input matInput placeholder="กลุ่มนักศึกษา" formControlName="student_group">
     </mat-form-field>
 
     <!-- <div mat-dialog-actions> -->
@@ -86,36 +157,40 @@
   <form class="animation" [formGroup]="editadvisor" (ngSubmit)="editAdvisor()">
     <h3>แก้ไขข้อมูล</h3>
     <fieldset disabled="disabled">
-      <mat-form-field>
-        <input matInput placeholder="Advisor_id" formControlName="advisor_id" [value]="updateadvisor_id" [(ngModel)]="updateadvisor_id">
-      </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="หมายเลข" formControlName="id" [value]="updateid" [(ngModel)]="updateid">
+    </mat-form-field>
     </fieldset>
     <br>
     <mat-form-field>
-      <input matInput placeholder="Firstname" formControlName="firstname" [value]="updatefirstname" [(ngModel)]="updatefirstname">
+      <input matInput placeholder="ชื่อ-นามสกุล" formControlName="advisor_name" [value]="updateadvisor_name" [(ngModel)]="updateadvisor_name">
     </mat-form-field>
-    <br>
+    <!-- <br>
     <mat-form-field>
       <input matInput placeholder="Lastname" formControlName="lastname" [value]="updatelastname" [(ngModel)]="updatelastname">
+    </mat-form-field> -->
+    <br>
+    <mat-form-field>
+      <input matInput placeholder="อีเมล์" formControlName="email" [value]="updateemail" [(ngModel)]="updateemail">
     </mat-form-field>
     <br>
     <mat-form-field>
-      <input matInput placeholder="Email" formControlName="email" [value]="updateemail" [(ngModel)]="updateemail">
+      <input matInput placeholder="เบอร์โทรศัพท์" formControlName="phone_number" [value]="updatephone_number"
+        [(ngModel)]="updatephone_number">
     </mat-form-field>
     <br>
     <mat-form-field>
-      <input matInput placeholder="Phone" formControlName="phone_number" [value]="updatephone_number" [(ngModel)]="updatephone_number">
+      <input matInput placeholder="คณะ" formControlName="faculty" [value]="updatefaculty" [(ngModel)]="updatefaculty">
     </mat-form-field>
     <br>
     <mat-form-field>
-      <input matInput placeholder="Faculty" formControlName="faculty" [value]="updatefaculty" [(ngModel)]="updatefaculty">
+      <input matInput placeholder="ภาควิชา" formControlName="department" [value]="updatedepartment" [(ngModel)]="updatedepartment">
     </mat-form-field>
     <br>
     <mat-form-field>
-      <input matInput placeholder="Department" formControlName="department" [value]="updatedepartment" [(ngModel)]="updatedepartment">
+      <input matInput placeholder="กลุ่มนักศึกษา" formControlName="student_group" [value]="updatestudent_group"
+        [(ngModel)]="updatestudent_group">
     </mat-form-field>
-
-
     <!-- <div mat-dialog-actions> -->
     <br>
     <button mat-button mat-raised-button color="warn" (click)="closeModal()">ยกเลิก</button>

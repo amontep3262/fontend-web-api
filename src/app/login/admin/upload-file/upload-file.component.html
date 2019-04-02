@@ -7,10 +7,36 @@
   <div class="row">
     <div class="col-md-4"></div>
     <div class="col-md-4">
-      <mat-form-field class="example-full-width">
-        <input matInput placeholder="uploadfile" type="file" class="form-control-file">
-      </mat-form-field>
+      <div class="upload">
+        <br>
+        <br>
+        <!-- <mat-form-field class="example-full-width"> -->
+        <input type="file" style="display: inline-block;" (change)="incomingfile($event)" placeholder="Upload file"
+          accept=".xlsx" class="form-control-file">
+        <button mat-raised-button color="primary" type="button" (click)="Upload()">ยืนยัน</button>
+        <!-- </mat-form-field> -->
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+      </div>
     </div>
     <div class="col-md-4"></div>
+  </div>
+  <div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-8" >
+      <div class="table">
+        <label>ตัวอย่างไฟล์ข้อมูล</label>
+        <br>
+        <br>
+        <img src="../../../../assets/table.PNG" class="table">
+
+      </div>
+
+
+    </div>
+    <div class="col-md-2"></div>
   </div>
 </div>
