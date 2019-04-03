@@ -12,7 +12,8 @@ import {
     MatPaginatorModule,
     MatExpansionModule,
     MatFormFieldModule,
-    MatDialogModule
+    MatDialogModule,
+    
     
 } from '@angular/material'
 @NgModule({

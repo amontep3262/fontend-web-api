@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ServiceService } from '../../../service.service';
 import { MatTableDataSource, MatPaginator } from '@angular/material';
+
 @Component({
   selector: 'app-report-behavior',
   templateUrl: './report-behavior.component.html',
@@ -24,6 +25,7 @@ export class ReportBehaviorComponent implements OnInit {
   ) { }
 
   public department = new FormControl('');
+  public student_id = new FormControl('');
 
   ngOnInit() {
     this.service.getdepartment().subscribe(
@@ -36,6 +38,26 @@ export class ReportBehaviorComponent implements OnInit {
     this.service.getbehavior().subscribe(
       (res)=>{
         this.listbehavior = res;
+        console.log(this.listbehavior);
+        
+        this.dataSource = new MatTableDataSource(res as any[])
+        this.dataSource.paginator = this.paginator;
+        
+      }
+    )
+  }
+
+  sreachbhv(){
+    console.log(this.student_id.value);
+    
+    this.service.sreachbhv(this.student_id.value).subscribe(
+      
+      
+      (res)=>{
+        console.log(this.student_id.value);
+        this.listbehavior=res;
+        console.log(this.listbehavior);
+        
         this.dataSource = new MatTableDataSource(res as any[])
         this.dataSource.paginator = this.paginator;
         
@@ -44,6 +66,8 @@ export class ReportBehaviorComponent implements OnInit {
   }
 
   selectdepartment(){
+    console.log(this.department.value);
+    
     this.service.getbehaviordepart(this.department.value).subscribe(
       (res)=>{
         // alert("suc")

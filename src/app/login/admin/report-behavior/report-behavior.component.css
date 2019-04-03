@@ -12,13 +12,17 @@
     color :aliceblue;
     width: 100%;
 }
+mat-select{
+    background-color: darkgray;
+    color: rgb(0, 0, 0);
+}
 .mat-elevation-z8{
-    /* text-align: center; */
+    text-align: center;
     font-size: 16px;
   }
   table {
     width: 100%;
-    /* text-align: center; */
+    text-align: center;
   }
   th{
     /* background-color: #919090; */
@@ -70,11 +74,6 @@
     padding-top: 4px;
 } */
 .sreach{
-    width: 28.3%;
+    background-color: darkgray;
     color: rgb(0, 0, 0);
-    border: 3px solid rgb(139, 139, 139);
-    background-color: rgb(255, 255, 255);
-    margin-left: 50px;
-    /* padding-left: 10px; */
-    /* padding-right: 10px; */
 }

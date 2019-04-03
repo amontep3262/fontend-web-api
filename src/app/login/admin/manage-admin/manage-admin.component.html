@@ -21,30 +21,30 @@
               
                           <!-- Position Column -->
                           <ng-container matColumnDef="บัญชีผู้ดูแลระบบ">
-                            <th mat-header-cell *matHeaderCellDef> บัญชีผู้ดูแลระบบ </th>
+                            <th mat-header-cell *matHeaderCellDef style="text-align: center;"> บัญชีผู้ดูแลระบบ </th>
                             <td mat-cell *matCellDef="let element"> {{element.admin_id}} </td>
                           </ng-container>
               
                           <!-- Name Column -->
                           <ng-container matColumnDef="รหัสผ่าน">
-                            <th mat-header-cell *matHeaderCellDef> รหัสผ่าน </th>
+                            <th mat-header-cell *matHeaderCellDef style="text-align: center;"> รหัสผ่าน </th>
                             <td mat-cell *matCellDef="let element"> {{element.admin_password}} </td>
                           </ng-container>
               
                           <!-- Weight Column -->
                           <ng-container matColumnDef="ชื่อ">
-                            <th mat-header-cell *matHeaderCellDef> ชื่อ </th>
+                            <th mat-header-cell *matHeaderCellDef style="text-align: center;"> ชื่อ </th>
                             <td mat-cell *matCellDef="let element"> {{element.firstname}} </td>
                           </ng-container>
               
                           <!-- Symbol Column -->
                           <ng-container matColumnDef="นามสกุล">
-                            <th mat-header-cell *matHeaderCellDef> นามสกุล </th>
+                            <th mat-header-cell *matHeaderCellDef style="text-align: center;"> นามสกุล </th>
                             <td mat-cell *matCellDef="let element"> {{element.lastname}} </td>
                           </ng-container>
 
                           <ng-container matColumnDef="แก้ไข/ลบ">
-                            <th mat-header-cell *matHeaderCellDef> แก้ไข/ลบ </th>
+                            <th mat-header-cell *matHeaderCellDef style="text-align: center;"> แก้ไข/ลบ </th>
                             <td mat-cell *matCellDef="let element">&nbsp;&nbsp;&nbsp;&nbsp;<i style="cursor: pointer;" class="fa fa-pencil" (click)="updateadmin(element,edit)"
                                 aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                               <i class="fa fa-trash-o" (click)="deleteadmin(element.admin_id,delete)" aria-hidden="true" style="cursor: pointer;"></i></td>
@@ -116,7 +116,7 @@
 
 <ng-template #edit let-modal>
     <form class="animation" [formGroup]="editadmin" (ngSubmit)="editAdmin()">
-        <h3>แก้ไขข้อมูล</h3>
+        <h3>แก้ไขข้อมูลผู้ดูแลระบบ</h3>
         <fieldset disabled="disabled">
             <mat-form-field>
                 <input matInput placeholder="บัญชีผู้ดูแลระบบ" formControlName="admin_id" [value]="updateadmin_id" [(ngModel)]="updateadmin_id">

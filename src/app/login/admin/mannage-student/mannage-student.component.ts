@@ -12,7 +12,7 @@ import { MatTableDataSource, MatPaginator } from '@angular/material';
 })
 export class MannageStudentComponent implements OnInit {
 
-  displayedColumns: string[] = ['หมายเลขบัตรประชาชน', 'รหัสนักศึกษา', 'ชื่อ-นามสกุล', 'เพศ','วันเกิด','คณะ','ภาควิชา','กลุ่ม','ชั้นปี','แก้ไข/ลบ'];
+  displayedColumns: string[] = ['หมายเลขบัตรประชาชน', 'รหัสนักศึกษา', 'ชื่อ-นามสกุล', 'เพศ','คณะ','ภาควิชา','กลุ่ม','ชั้นปี','แก้ไข/ลบ'];
   dataSource : MatTableDataSource<[any]>;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;

@@ -88,4 +88,10 @@ export class ServiceService {
   sreachadv(data){
     return this.http.get(urlServer.ipServer+'sreachadv/'+data)
   }
+  sreachbhv(data){
+    return this.http.get(urlServer.ipServer+'sreachbhv/'+data)
+  }
+  selectbhvdepartment(data){
+    return this.http.get(urlServer.ipServer+'selectbehaviordepart/'+data)
+  }
 }

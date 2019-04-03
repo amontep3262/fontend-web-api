@@ -1,3 +1,3 @@
 export const urlServer = {
-    ipServer: 'http://192.168.1.110:3000/'
+    ipServer: 'http://172.20.10.11:3000/'
 }

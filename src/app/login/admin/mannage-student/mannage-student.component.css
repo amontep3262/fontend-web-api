@@ -39,7 +39,11 @@ body{
   td{
     background-color: #7e7c7c;
     border: 2px solid rgb(94, 94, 94);
+    
   }
+  /* mat-header-cell{ */
+      /* text-align: center; */
+  /* } */
   /* orm{
     margin: 30px;
     transition-delay: 2s;
